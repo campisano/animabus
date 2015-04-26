@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>test track store webservice</title>
+<script src="lib/jquery-2.1.3.min.js"></script>
+<script type="text/javascript">
+	var url_test = "/animabusws/rest/test";
+	var data_test = "Hey!";
+	var url_webservice = "/animabusws/rest/track/store";
+	var data_webservice = {
+		"imei" : "313213215421309483821",
+		"line_number" : "4422",
+		"start_time" : 1335700802000,
+		"end_time" : 1335700802000,
+		"vote" : 3,
+		"gps" : [ {
+			"timestamp" : 1429243456423,
+			"heading" : null,
+			"altitude" : null,
+			"latitude" : -45.87475166666666,
+			"longitude" : 170.33488333333335,
+			"accuracy" : 0,
+			"altitude_accuracy" : null,
+			"speed" : null
+		}, {
+			"timestamp" : 1429243456423,
+			"heading" : null,
+			"altitude" : null,
+			"latitude" : -45.87475166666666,
+			"longitude" : 170.33488333333335,
+			"accuracy" : 0,
+			"altitude_accuracy" : null,
+			"speed" : null
+		} ],
+		"accelerometer" : [ {
+			"timestamp" : 1429243456423,
+			"x" : null,
+			"y" : null,
+			"z" : null
+		}, {
+			"timestamp" : 1429243456423,
+			"x" : null,
+			"y" : null,
+			"z" : null
+		} ]
+	};
+
+	$(document).ready(function() {
+		$("#btn_test").click(function() {
+			$.ajax({
+				url : url_test,
+				type : "POST",
+				contentType : "application/json; charset=utf-8",
+				mimeType : "application/json",
+				dataType : "json",
+				cache : false,
+				data : JSON.stringify(data_test),
+				success : function(data) {
+					alert(JSON.stringify(data, null, 2));
+				},
+				failure : function(errMsg) {
+					alert(JSON.stringify(errMsg, null, 2));
+				}
+			});
+		});
+
+		$("#btn_webservice").click(function() {
+			$.ajax({
+				url : url_webservice,
+				type : "POST",
+				contentType : "application/json; charset=utf-8",
+				mimeType : "application/json",
+				dataType : "json",
+				cache : false,
+				data : JSON.stringify(data_webservice),
+				success : function(data) {
+					alert(JSON.stringify(data, null, 2));
+				},
+				failure : function(errMsg) {
+					alert(JSON.stringify(errMsg, null, 2));
+				}
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	<button id="btn_test">Test ajax</button>
+	<br />
+	<button id="btn_webservice">Send sample ajax data</button>
+</body>
+</html>
