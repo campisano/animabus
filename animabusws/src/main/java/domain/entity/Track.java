@@ -32,7 +32,7 @@ public class Track {
 	@ManyToOne(optional = false)
 	private User user;
 
-	private Track() {
+	protected Track() {
 	}
 
 	public Track(String lineNumber, int vote, Date startTime, Date endTime,

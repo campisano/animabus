@@ -32,7 +32,7 @@ public class Moviment {
 	@ManyToOne(optional = false)
 	private Track track;
 
-	private Moviment() {
+	protected Moviment() {
 	}
 
 	public Moviment(Date timestamp, double x, double y, double z, Track track) {

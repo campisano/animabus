@@ -11,7 +11,7 @@ public class User {
 	@Id
 	private String id;
 
-	private User() {
+	protected User() {
 	}
 
 	public User(String id) {

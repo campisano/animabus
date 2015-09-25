@@ -44,7 +44,7 @@ public class Position {
 	@ManyToOne(optional = false)
 	private Track track;
 
-	private Position() {
+	protected Position() {
 	}
 
 	public Position(Date timestamp, double heading, double altitude,
