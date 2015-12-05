@@ -1,20 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- from http://www.mkyong.com/spring-mvc/spring-3-mvc-and-json-example/ -->
-
+  
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:beans="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans.xsd
-                           http://www.springframework.org/schema/context
-                           http://www.springframework.org/schema/context/spring-context.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	                    http://www.springframework.org/schema/context 
+	                    http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-    <!-- Use @Component annotations for bean definitions -->
-    <context:component-scan base-package="persistence"/>
-    <context:component-scan base-package="domain"/>
-    <context:component-scan base-package="service"/>
-    <context:component-scan base-package="presenter"/>
-    <context:component-scan base-package="test"/>
+	<context:annotation-config />
+
+
+	<bean id="GpsBusDAOJPABean" class="infrastructure.persistence.jpa.GpsBusDAOJPA" />
+	<bean id="GpsBusRepositoryBean" class="domain.repository.GpsBusRepository" />
+	<bean id="IntegrationDataRioBean" class="service.track.IntegrationDataRio" />
+	<bean id="GpsBusServiceBean" class="service.track.GpsBusService"/>
+
+	<!-- Scheduler -->
+	<bean id="jobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="GpsBusServiceBean" />
+		<property name="targetMethod" value="insertListBus" />
+	</bean>
+
+	<bean id="simpleTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<!-- see the example of method invoking job above -->
+		<property name="jobDetail" ref="jobDetail" />
+		<!-- repeat every 60 seconds -->
+		<property name="repeatInterval" value="60000" />
+	</bean>
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="simpleTrigger" />
+			</list>
+		</property>
+	</bean>
 </beans>
