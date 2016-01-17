@@ -3,36 +3,101 @@
 <!-- from http://www.mkyong.com/spring-mvc/spring-3-mvc-and-json-example/ -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:beans="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans.xsd
-                           http://www.springframework.org/schema/context
-                           http://www.springframework.org/schema/context/spring-context.xsd
-                           http://www.springframework.org/schema/mvc
-                           http://www.springframework.org/schema/mvc/spring-mvc.xsd
-                           http://www.springframework.org/schema/tx
-                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:beans="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+						   http://www.springframework.org/schema/beans/spring-beans.xsd
+						   http://www.springframework.org/schema/context
+						   http://www.springframework.org/schema/context/spring-context.xsd
+						   http://www.springframework.org/schema/mvc
+						   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						   http://www.springframework.org/schema/tx
+						   http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!-- Use @Component annotations for bean definitions -->
-    <context:component-scan base-package="persistence"/>
-    <context:component-scan base-package="domain"/>
-    <context:component-scan base-package="service"/>
-    <context:component-scan base-package="presentation"/>
-    <context:component-scan base-package="infrastructure"/>
 
-    <mvc:annotation-driven/>
+	 
+<!--
+	 org.springframework.scheduling.quartz
+Interfaces
 
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="defaultPersistenceUnit"/>
-    </bean>
+	SchedulerContextAware
 
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
+Classes
 
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+	AdaptableJobFactory
+	CronTriggerFactoryBean
+	DelegatingJob
+	JobDetailFactoryBean
+	LocalDataSourceJobStore
+	LocalTaskExecutorThreadPool
+	MethodInvokingJobDetailFactoryBean
+	MethodInvokingJobDetailFactoryBean.MethodInvokingJob
+	MethodInvokingJobDetailFactoryBean.StatefulMethodInvokingJob
+	QuartzJobBean
+	ResourceLoaderClassLoadHelper
+	SchedulerAccessor
+	SchedulerAccessorBean
+	SchedulerFactoryBean
+	SimpleThreadPoolTaskExecutor
+	SimpleTriggerFactoryBean
+	SpringBeanJobFactory
+-->
+
+	<!-- Use @Component annotations for bean definitions -->
+	<context:component-scan base-package="persistence"/>
+	<context:component-scan base-package="domain"/>
+	<context:component-scan base-package="service"/>
+	<context:component-scan base-package="presentation"/>
+	<context:component-scan base-package="infrastructure"/>
+	 
+	 
+	<!-- Quartz scheduler START -->
+	
+	<!-- Define the Job Bean that will be executed. Our bean is named in the jobClass property. -->
+	<bean name="getBusGPSPositionJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="infrastructure.GetBusGPSPositionJob"/>
+		<property name="durability" value="true" />
+	</bean>
+
+	<!-- Associate the Job Bean with a Trigger. Triggers define when a job is executed. -->
+	<bean id="getBusGPSPositionTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<!-- invoke job above -->
+		<property name="jobDetail" ref="getBusGPSPositionJobDetail"/>
+		<!-- delay start by 10 seconds -->
+		<property name="startDelay" value="10000"/>
+		<!-- repeat every 60 seconds -->
+		<property name="repeatInterval" value="60000"/>
+	</bean>
+
+	<!-- A list of Triggers to be scheduled and executed by Quartz -->
+	<bean id="getBusGPSPositionScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="applicationContextSchedulerContextKey">
+			<value>applicationContext</value>
+		 </property>
+		<property name="triggers">
+			<list>
+				<ref bean="getBusGPSPositionTrigger"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Quartz scheduler END -->
+	
+	
+	
+	
+	<mvc:annotation-driven/>
+
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="defaultPersistenceUnit"/>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

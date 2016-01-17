@@ -27,6 +27,7 @@
 		<spring-tx.version>4.0.2.RELEASE</spring-tx.version>
 		<spring-data-jpa.version>1.5.1.RELEASE</spring-data-jpa.version>
 		<spring-test.version>4.0.2.RELEASE</spring-test.version>
+		<spring-context-support.version>4.0.2.RELEASE</spring-context-support.version>
 
 		<!-- Jackson -->
 		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
@@ -37,8 +38,8 @@
 
 		<!-- Database -->
 		<hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
-        <hibernate-entitymanager.version>4.2.8.Final</hibernate-entitymanager.version>
-        <hsqldb.version>2.3.2</hsqldb.version>
+		<hibernate-entitymanager.version>4.2.8.Final</hibernate-entitymanager.version>
+		<hsqldb.version>2.3.2</hsqldb.version>
 
 		<!-- Quartz -->
 		<quartz.version>2.2.1</quartz.version>
@@ -109,6 +110,12 @@
 			<version>${spring-data-jpa.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring-context-support.version}</version>
+		</dependency>
+
 
 
 		<!-- Jackson -->
@@ -137,11 +144,11 @@
 
 		<!-- Database -->
 		<dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>${hibernate-jpa-2.0-api.version}</version>
-        </dependency>
-		
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>${hibernate-jpa-2.0-api.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>

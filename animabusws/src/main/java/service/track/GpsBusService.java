@@ -18,7 +18,7 @@ public class GpsBusService {
 	@Autowired
 	IntegrationDataRio integrationDataRio;
 	
-	public void insert(GpsBus bus) {
+	private void insert(GpsBus bus) {
 		gpsBusRepository.insert(bus);
 	}
 	
