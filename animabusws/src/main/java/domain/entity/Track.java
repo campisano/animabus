@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "track")
+@Table(name = "abws_track")
 public class Track {
 
 	@Id

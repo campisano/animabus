@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="gps_onibus")
+@Table(name="abws_gps_onibus")
 public class GpsBus {
 
 	@Id

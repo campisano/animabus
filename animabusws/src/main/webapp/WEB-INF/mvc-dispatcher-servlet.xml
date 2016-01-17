@@ -56,10 +56,11 @@ Classes
 	 
 	<!-- Quartz scheduler START -->
 	
-	<!-- Define the Job Bean that will be executed. Our bean is named in the jobClass property. -->
-	<bean name="getBusGPSPositionJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass" value="infrastructure.GetBusGPSPositionJob"/>
-		<property name="durability" value="true" />
+	<!-- Define the Job Bean that will be executed. Our bean is named in the targetObject property. -->
+	<bean name="getBusGPSPositionJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="gpsBusService"/> <!-- This is GpsBusService bean class defined by component-scan -->
+		<property name="targetMethod" value="insertListBus"/>
 	</bean>
 
 	<!-- Associate the Job Bean with a Trigger. Triggers define when a job is executed. -->
@@ -76,7 +77,7 @@ Classes
 	<bean id="getBusGPSPositionScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="applicationContextSchedulerContextKey">
 			<value>applicationContext</value>
-		 </property>
+		</property>
 		<property name="triggers">
 			<list>
 				<ref bean="getBusGPSPositionTrigger"/>

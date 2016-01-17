@@ -40,6 +40,7 @@
 		<hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
 		<hibernate-entitymanager.version>4.2.8.Final</hibernate-entitymanager.version>
 		<hsqldb.version>2.3.2</hsqldb.version>
+		<postgresql.version>9.4.1207.jre6</postgresql.version>
 
 		<!-- Quartz -->
 		<quartz.version>2.2.1</quartz.version>
@@ -159,6 +160,12 @@
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>${hsqldb.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
 		</dependency>
 
 		<!-- Quartz -->
