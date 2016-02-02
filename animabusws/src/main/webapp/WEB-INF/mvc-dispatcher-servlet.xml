@@ -87,18 +87,26 @@ Classes
 	
 	<!-- Quartz scheduler END -->
 	
-	
-	
-	
 	<mvc:annotation-driven/>
 
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+	<!-- http://docs.spring.io/spring/docs/current/spring-framework-reference/html/orm.html#orm-jpa-setup-lcemfb -->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="defaultPersistenceUnit"/>
 	</bean>
+	
+	<bean id="genericDAOJPA" class="infrastructure.persistence.jpa.GenericDAOJPA">
+		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
+	</bean>
 
+
+
+<!-- http://docs.spring.io/spring/docs/current/spring-framework-reference/html/orm.html#orm-jpa-tx -->
+<!--
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"/>
 	</bean>
 
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+-->
+
 </beans>

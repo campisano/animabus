@@ -4,25 +4,29 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 public class GenericDAOJPA<T> {
 
-	private static EntityManager entityManager;
+	private static EntityManagerFactory entityManagerFactory;
 
 	Logger logger = Logger.getLogger(GenericDAOJPA.class.getName());
 
 	public GenericDAOJPA() {
-		GenericDAOJPA.entityManager = new JPAUtil().getEntityManager();
-
+	}
+	
+	public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
+		GenericDAOJPA.entityManagerFactory = entityManagerFactory;
 	}
 
 	public void create(T entity) {
 		EntityTransaction tx = null;
 
 		try {
+			EntityManager entityManager = entityManagerFactory.createEntityManager();
 			tx = entityManager.getTransaction();
 			tx.begin();
 			entityManager.persist(entity);
@@ -42,6 +46,7 @@ public class GenericDAOJPA<T> {
 		T entity = null;
 
 		try {
+			EntityManager entityManager = entityManagerFactory.createEntityManager();
 			logger.info("Getting entity with id = " + id + " and class = "
 					+ classType.getName());
 			entity = entityManager.find(classType, id);
@@ -65,6 +70,7 @@ public class GenericDAOJPA<T> {
 
 	protected List<T> getEntities(String queryString,
 			final Object... positionalParams) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		Query query = entityManager.createQuery(queryString);
 		int i = 0;
 
@@ -79,6 +85,7 @@ public class GenericDAOJPA<T> {
 	}
 
 	protected T getEntity(String queryString, final Object... positionalParams) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		Query query = entityManager.createQuery(queryString);
 		int i = 0;
 
@@ -107,6 +114,7 @@ public class GenericDAOJPA<T> {
 		EntityTransaction tx = null;
 
 		try {
+			EntityManager entityManager = entityManagerFactory.createEntityManager();
 			tx = entityManager.getTransaction();
 			tx.begin();
 			entity = entityManager.merge(entity);
@@ -126,6 +134,7 @@ public class GenericDAOJPA<T> {
 		EntityTransaction tx = null;
 
 		try {
+			EntityManager entityManager = entityManagerFactory.createEntityManager();
 			tx = entityManager.getTransaction();
 			tx.begin();
 			T entidade = entityManager.find(c, id);
