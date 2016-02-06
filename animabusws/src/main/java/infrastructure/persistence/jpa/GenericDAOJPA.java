@@ -4,55 +4,45 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
 public class GenericDAOJPA<T> {
 
-	private static EntityManagerFactory entityManagerFactory;
+	@PersistenceContext
+	public EntityManager entityManager;
 
 	Logger logger = Logger.getLogger(GenericDAOJPA.class.getName());
 
 	public GenericDAOJPA() {
 	}
 	
-	public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
-		GenericDAOJPA.entityManagerFactory = entityManagerFactory;
-	}
-
+	@Transactional
 	public void create(T entity) {
-		EntityTransaction tx = null;
-
 		try {
-			EntityManager entityManager = entityManagerFactory.createEntityManager();
-			tx = entityManager.getTransaction();
-			tx.begin();
 			entityManager.persist(entity);
-			tx.commit();
-
 		} catch (Exception ex) {
-
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-
+			logger.warning(ex.toString());
 			throw new DAOException("Entity create error.", ex);
 		}
 	}
 
+	@Transactional
 	public T read(Class<T> classType, Object id) throws DAOException {
 		T entity = null;
 
 		try {
-			EntityManager entityManager = entityManagerFactory.createEntityManager();
 			logger.info("Getting entity with id = " + id + " and class = "
 					+ classType.getName());
 			entity = entityManager.find(classType, id);
 
 		} catch (RuntimeException ex) {
-
+			logger.warning(ex.toString());
 			throw new DAOException("Entity retreive error.", ex);
 		}
 
@@ -68,9 +58,9 @@ public class GenericDAOJPA<T> {
 		return getEntities("SELECT e FROM " + entityName + " e");
 	}
 
+	@Transactional
 	protected List<T> getEntities(String queryString,
 			final Object... positionalParams) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		Query query = entityManager.createQuery(queryString);
 		int i = 0;
 
@@ -84,8 +74,8 @@ public class GenericDAOJPA<T> {
 		return entities;
 	}
 
+	@Transactional
 	protected T getEntity(String queryString, final Object... positionalParams) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		Query query = entityManager.createQuery(queryString);
 		int i = 0;
 
@@ -106,47 +96,29 @@ public class GenericDAOJPA<T> {
 
 			return true;
 		} catch (NoResultException ex) {
+			logger.warning(ex.toString());
 			return false;
 		}
 	}
 
+	@Transactional
 	public void update(T entity) {
-		EntityTransaction tx = null;
-
 		try {
-			EntityManager entityManager = entityManagerFactory.createEntityManager();
-			tx = entityManager.getTransaction();
-			tx.begin();
 			entity = entityManager.merge(entity);
-			tx.commit();
-
 		} catch (Exception ex) {
-
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-
+			logger.warning(ex.toString());
 			throw new DAOException("Entity update error.", ex);
 		}
 	}
 
+	@Transactional
 	public void delete(Class<T> c, Object id) {
-		EntityTransaction tx = null;
-
 		try {
-			EntityManager entityManager = entityManagerFactory.createEntityManager();
-			tx = entityManager.getTransaction();
-			tx.begin();
 			T entidade = entityManager.find(c, id);
 			entityManager.remove(entidade);
-			tx.commit();
 
 		} catch (Exception ex) {
-
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-
+			logger.warning(ex.toString());
 			throw new DAOException("Entity delete error.", ex);
 		}
 	}

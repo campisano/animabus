@@ -11,6 +11,7 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<!-- HSQL database START -->
+		<!-- - ->
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
 			<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
@@ -19,7 +20,7 @@
 			<property name="hibernate.connection.password" value=""/>
 			<property name="hibernate.connection.pool_size" value="25"/>
 			<property name="hibernate.connection.autoReconnect" value="true"/>
-			<!-- property name="hibernate.show_sql" value="true"/ -->
+			<property name="hibernate.show_sql" value="true"/>
 			<property name="hibernate.format_sql" value="true"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
@@ -27,33 +28,33 @@
 			<property name="hibernate.connection.characterEncoding" value="UTF-8"/>
 			<property name="hibernate.connection.useUnicode" value="true"/>
 		</properties>
-		
+		<!- - -->
 		<!-- HSQL database END -->
 		
 		
 		
-		<!-- Postgresql database START - ->
-	
+		<!-- Postgresql database START -->
+		<!-- -->
 		<properties>
-			<property name="hibernate.archive.autodetection" value="class" />
-			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
-			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/animabusws_db" />
-			<property name="hibernate.connection.username" value="animabusws_user" />
-			<property name="hibernate.connection.password" value="animabusws_pass" />
+			<property name="hibernate.archive.autodetection" value="class"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/animabusws_db"/>
+			<property name="hibernate.connection.username" value="animabusws_user"/>
+			<property name="hibernate.connection.password" value="animabusws_db"/>
 			<property name="hibernate.connection.pool_size" value="25"/>
 			<property name="hibernate.connection.autoReconnect" value="true"/>
-			<!- - property name="hibernate.show_sql" value="true"/ - ->
-			<property name="hibernate.format_sql" value="true"/>
-			<property name="hibernate.flushMode" value="FLUSH_AUTO" />
+			<!-- property name="hibernate.show_sql" value="true"/  -->
+			<!-- property name="hibernate.format_sql" value="true"/ -->
+			<property name="hibernate.flushMode" value="FLUSH_AUTO"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
 			<property name="hibernate.connection.charSet" value="UTF-8"/>
 			<property name="hibernate.connection.characterEncoding" value="UTF-8"/>
 			<property name="hibernate.connection.useUnicode" value="true"/>
 		</properties>
-		
-		<!- - Postgresql database END -->
+		<!-- -->
+		<!-- Postgresql database END -->
 
 	</persistence-unit>
 

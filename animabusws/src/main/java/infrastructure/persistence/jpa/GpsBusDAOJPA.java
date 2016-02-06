@@ -11,14 +11,17 @@ import persistence.IGpsBusDAO;
 public class GpsBusDAOJPA extends GenericDAOJPA<GpsBus> implements
 	IGpsBusDAO {
 
+	@Override
 	public GpsBus read(Long id) {
 		return read(GpsBus.class, id);
 	}
 
+	@Override
 	public List<GpsBus> readAll() {
 		return readAll(GpsBus.class);
 	}
 
+	@Override
 	public void delete(Long id) {
 		delete(GpsBus.class, id);
 	}
