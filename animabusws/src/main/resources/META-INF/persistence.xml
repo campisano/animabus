@@ -41,7 +41,7 @@
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
 			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/animabusws_db"/>
 			<property name="hibernate.connection.username" value="animabusws_user"/>
-			<property name="hibernate.connection.password" value="animabusws_db"/>
+			<property name="hibernate.connection.password" value="animabusws_pass"/>
 			<property name="hibernate.connection.pool_size" value="25"/>
 			<property name="hibernate.connection.autoReconnect" value="true"/>
 			<!-- property name="hibernate.show_sql" value="true"/  -->
