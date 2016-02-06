@@ -76,13 +76,10 @@ public class GpsBusList {
 			bus.setDataHora(list.get(0));
 			bus.setOrdem(list.get(1));
 			bus.setLinha(list.get(2));
-			bus.setLatitude(list.get(3));
-			bus.setLongitude(list.get(4));
-			bus.setVelocidade(list.get(5));
-
+			bus.setLatitude(Double.parseDouble(list.get(3)));
+			bus.setLongitude(Double.parseDouble(list.get(4)));
+			bus.setVelocidade(Float.parseFloat(list.get(5)));
 			gpsBusList.add(bus);
-
-			continue;
 		}
 	}
 }

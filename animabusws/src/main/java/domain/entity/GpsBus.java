@@ -17,23 +17,23 @@ public class GpsBus {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Column
+	@Column(length=24)
 	private String dataHora;
 	
-	@Column
+	@Column(length=8)
 	private String ordem;
 	
-	@Column
+	@Column(length=8)
 	private String linha;
 	
 	@Column
-	private String latitude;
+	private double latitude;
 	
 	@Column
-	private String longitude;
+	private double longitude;
 	
 	@Column
-	private String velocidade;
+	private float velocidade;
 	
 	@Column
 	private Date registro;
@@ -62,27 +62,27 @@ public class GpsBus {
 		this.linha = linha;
 	}
 
-	public String getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(String latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
-	public String getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 
-	public String getVelocidade() {
+	public float getVelocidade() {
 		return velocidade;
 	}
 
-	public void setVelocidade(String velocidade) {
+	public void setVelocidade(float velocidade) {
 		this.velocidade = velocidade;
 	}
 

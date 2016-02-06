@@ -33,4 +33,8 @@ public class GpsBusRepository {
 	public void remove(long id) {
 		dao.delete(id);
 	}
+
+	public void insertList(List<GpsBus> gpsOnibusList) {
+		dao.insertList(gpsOnibusList);
+	}
 }
