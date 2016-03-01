@@ -93,5 +93,25 @@ public class GpsBus {
 	public void setRegistro(Date registro) {
 		this.registro = registro;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		GpsBus other = (GpsBus) obj;
+		
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+
+		if (ordem == null) {
+			if (other.ordem != null)
+				return false;
+		} else if (!ordem.equals(other.ordem))
+			return false;
+		
+		return true;
+	}
 }
 

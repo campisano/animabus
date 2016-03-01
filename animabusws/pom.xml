@@ -47,6 +47,9 @@
 
 		<!-- JUnit -->
 		<junit.version>4.11</junit.version>
+		
+		<!-- Joda Time -->
+		<joda-time.version>2.9.2</joda-time.version>
 
 	</properties>
 
@@ -161,7 +164,7 @@
 			<artifactId>hsqldb</artifactId>
 			<version>${hsqldb.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -173,6 +176,13 @@
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
 			<version>${quartz.version}</version>
+		</dependency>
+
+		<!-- Joda Time -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.version}</version>
 		</dependency>
 
 
