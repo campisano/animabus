@@ -1,5 +1,7 @@
 package domain.entity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +60,7 @@ public class GpsBusList {
 		this.additionalProperties.put(name, value);
 	}
 
-	public List<GpsBus> getGpsOnibusList() {
+	public List<GpsBus> getGpsBusList() throws ParseException {
 		if(gpsBusList.isEmpty()) {
 			convert();
 		}
@@ -70,15 +72,17 @@ public class GpsBusList {
 		this.gpsBusList = gpsOnibusList;
 	}
 	
-	private void convert() {
+	private void convert() throws ParseException {
 		for (List<String> list : data) {
 			GpsBus bus = new GpsBus();
-			bus.setDataHora(list.get(0));
+			SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");	
+			
+			bus.setDataHora(formatter.parse(list.get(0)));
 			bus.setOrdem(list.get(1));
 			bus.setLinha(list.get(2));
-			bus.setLatitude(list.get(3));
-			bus.setLongitude(list.get(4));
-			bus.setVelocidade(list.get(5));
+			bus.setLatitude(Double.parseDouble(list.get(3)));
+			bus.setLongitude(Double.parseDouble(list.get(4)));
+			bus.setVelocidade(Double.parseDouble(list.get(5)));
 
 			gpsBusList.add(bus);
 

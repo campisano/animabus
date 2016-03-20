@@ -10,7 +10,7 @@ public class TrackStoreRequest {
 	private Date start_time;
 	private Date end_time;
 	private Integer vote;
-	private List<GpsRequest> gps;
+	private List<GpsBusFront> gps;
 	private List<AccelerometerRequest> accelerometer;
 
 	public TrackStoreRequest() {
@@ -56,11 +56,11 @@ public class TrackStoreRequest {
 		this.vote = vote;
 	}
 
-	public List<GpsRequest> getGps() {
+	public List<GpsBusFront> getGps() {
 		return gps;
 	}
 
-	public void setGps(List<GpsRequest> gps) {
+	public void setGps(List<GpsBusFront> gps) {
 		this.gps = gps;
 	}
 

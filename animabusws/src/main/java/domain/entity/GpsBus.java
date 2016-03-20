@@ -9,8 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 @Entity
 @Table(name="abws_gps_onibus")
+@JsonInclude(Include.NON_NULL)
 public class GpsBus {
 
 	@Id
@@ -18,7 +22,7 @@ public class GpsBus {
 	private long id;
 	
 	@Column
-	private String dataHora;
+	private Date dataHora;
 	
 	@Column
 	private String ordem;
@@ -27,22 +31,22 @@ public class GpsBus {
 	private String linha;
 	
 	@Column
-	private String latitude;
+	private Double latitude;
 	
 	@Column
-	private String longitude;
+	private Double longitude;
 	
 	@Column
-	private String velocidade;
+	private Double velocidade;
 	
 	@Column
 	private Date registro;
 
-	public String getDataHora() {
+	public Date getDataHora() {
 		return dataHora;
 	}
 
-	public void setDataHora(String dataHora) {
+	public void setDataHora(Date dataHora) {
 		this.dataHora = dataHora;
 	}
 
@@ -62,27 +66,27 @@ public class GpsBus {
 		this.linha = linha;
 	}
 
-	public String getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(String latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
-	public String getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 
-	public String getVelocidade() {
+	public Double getVelocidade() {
 		return velocidade;
 	}
 
-	public void setVelocidade(String velocidade) {
+	public void setVelocidade(Double velocidade) {
 		this.velocidade = velocidade;
 	}
 

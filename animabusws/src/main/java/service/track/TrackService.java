@@ -66,7 +66,7 @@ public class TrackService {
 				request.getStart_time(), request.getEnd_time(), user);
 		trackRepository.insert(track);
 
-		for (GpsRequest gps : request.getGps()) {
+		for (GpsBusFront gps : request.getGps()) {
 			if (gps.getTimestamp() != null) {
 				double heading = gps.getHeading() == null ? 0 : gps
 						.getHeading().doubleValue();

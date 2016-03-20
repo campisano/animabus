@@ -47,7 +47,7 @@
 
 		<!-- JUnit -->
 		<junit.version>4.11</junit.version>
-		
+
 		<!-- Joda Time -->
 		<joda-time.version>2.9.2</joda-time.version>
 
@@ -128,6 +128,13 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>${jackson-mapper-asl.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.7.2</version>
+		</dependency>
+
 
 
 

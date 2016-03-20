@@ -2,7 +2,7 @@ package service.track;
 
 import java.util.Date;
 
-public class GpsRequest {
+public class GpsBusFront {
 
 	private Date timestamp;
 	private Double heading;
@@ -13,7 +13,7 @@ public class GpsRequest {
 	private Double altitude_accuracy;
 	private Double speed;
 
-	public GpsRequest() {
+	public GpsBusFront() {
 	}
 
 	public Date getTimestamp() {
